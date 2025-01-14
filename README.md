@@ -1,7 +1,7 @@
 # IoT_Seminarska-naloga
 *Vzpostavitev Ubuntu strežnika na rPi 3 in vzpostavitev Sophos-a (kibernetska varnost)*
 
-*1. Vzpostavitev Ubuntu strežnika na Raspberry Pi 3 in vzpostavitev Sophos-a*
+*1. Vzpostavitev Ubuntu strežnika na Raspberry Pi 3*
  
 V tej seminarski nalogi bom opisal postopek vzpostavitve Ubuntu strežnika na napravi Raspberry Pi 3 ter namestitev in konfiguracijo varnostne rešitve Sophos. Namen naloge je prikazati praktičen postopek priprave delujočega strežnika na osnovi priljubljene distribucije Ubuntu, ki je znana po svoji stabilnosti in prilagodljivosti, ter implementacije Sophos-a za povečanje varnosti sistema. 
 
@@ -30,3 +30,13 @@ Nato sem pri upravljalcu domen kupil domeno simon1999.xyz, da bi omogočil javno
 Da bi domena simon1999.xyz dejansko delovala, sem moral na svojem usmerjevalniku nastaviti port forwarding. S tem sem omogočil preusmeritev prometa na ustrezne porte svojega Raspberry Pi strežnika, kar je omogočilo dostop do spletne strani iz javnega omrežja.
 
 ![image](https://github.com/user-attachments/assets/1bc96d29-8c51-4528-9d68-71c7210a03a7)
+
+
+*2. Vzpostavitev Sophos-a*
+
+Podjetje, kjer delujem, se uvršča med subjekte kritične infrastrukture, zato smo se odločili vzpostaviti napreden sistem za kibernetsko zaščito – Sophos. Namen te odločitve je izboljšati varnostne ukrepe in zaščititi ključne digitalne procese ter naprave pred sodobnimi kibernetskimi grožnjami.
+
+Sophos je vodilno podjetje na področju kibernetske varnosti, ki ponuja celovite rešitve za zaščito naprav, omrežij in podatkov. Njihove rešitve vključujejo napreden protivirusni sistem, zaščito pred ransomware napadi, filtriranje spletnih vsebin ter sistem za zaznavanje in odzivanje na grožnje (EDR). Sophos je znan po enostavnem upravljanju, kar omogoča tudi manjšim ekipam učinkovito zaščito pred kompleksnimi kibernetskimi napadi.
+
+Sophos igra ključno vlogo tudi pri varovanju naprav interneta stvari (IoT). IoT naprave, ki so pogosto manj zaščitene in bolj ranljive za kibernetske napade, so pomemben del kritične infrastrukture. Sophos z uporabo naprednih metod, kot so segmentacija omrežja, preverjanje nenavadnih vzorcev prometa in uporaba umetne inteligence za odkrivanje groženj, zagotavlja, da IoT naprave ostanejo zaščitene pred morebitnimi vdori ali zlorabami. To omogoča celovito zaščito celotnega ekosistema, kjer so IoT naprave povezane s ključnimi informacijskimi sistemi.
+
