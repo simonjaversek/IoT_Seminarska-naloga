@@ -40,3 +40,31 @@ Sophos je vodilno podjetje na področju kibernetske varnosti, ki ponuja celovite
 
 Sophos igra ključno vlogo tudi pri varovanju naprav interneta stvari (IoT). IoT naprave, ki so pogosto manj zaščitene in bolj ranljive za kibernetske napade, so pomemben del kritične infrastrukture. Sophos z uporabo naprednih metod, kot so segmentacija omrežja, preverjanje nenavadnih vzorcev prometa in uporaba umetne inteligence za odkrivanje groženj, zagotavlja, da IoT naprave ostanejo zaščitene pred morebitnimi vdori ali zlorabami. To omogoča celovito zaščito celotnega ekosistema, kjer so IoT naprave povezane s ključnimi informacijskimi sistemi.
 
+Za namestitev Sophos sistema sem uporabil tradicionalni postopek, ki vključuje vzpostavitev centralnega upravljalnega strežnika in povezavo odjemalskih naprav. Proces sem začel z izbiro ustrezne različice Sophos programske opreme, ki je združljiva z našim sistemskim okoljem in potrebami podjetja.
+
+Najprej sem namestil Sophos Central, ki služi kot osrednja platforma za upravljanje varnostnih rešitev. Namestitev sem izvedel na namenski strežnik, kjer sem konfiguriral osnovne nastavitve, vključno z dodeljevanjem uporabniških pravic, določanjem varnostnih politik in nastavitvijo protokolov za posodobitve. Po uspešni namestitvi sem opravil začetno sinhronizacijo sistema, kar je omogočilo vzpostavitev osnovne varnostne infrastrukture.
+
+![image](https://github.com/user-attachments/assets/df133be7-09f1-4999-a2f9-55ee98fdd34d)
+
+Ko je bila centralna platforma pripravljena, sem na vse računalnike v podjetju namestil Sophos Endpoint Protection. Ta postopek je vključeval:
+1. Prenos odjemalske programske opreme: Prenos sem izvedel preko povezave z osrednjim strežnikom.
+2. Namestitev: Na posameznih računalnikih sem namestil odjemalsko aplikacijo in omogočil komunikacijo z osrednjim strežnikom Sophos.
+3. Povezava in registracija: Vsak računalnik sem registriral v sistem Sophos Central, kar omogoča nadzor in sprotno posodabljanje varnostnih nastavitev za vsako napravo.
+
+Po povezavi vseh računalnikov smo opravili testne preglede sistema, da smo zagotovili pravilno delovanje. Na podlagi rezultatov testiranja smo dodatno prilagodili varnostne politike, kot so samodejno blokiranje potencialnih groženj, redno pregledovanje naprav in obveščanje o varnostnih incidentih.
+
+![image](https://github.com/user-attachments/assets/c9e66996-fdf9-44fa-a3bc-5b960907b81a)
+
+![image](https://github.com/user-attachments/assets/6c8e436f-a6a5-4fd0-85c5-6385846fbdf7)
+
+Ko je v računalnik z nameščenim Sophos Endpoint Protection vstavljen nepooblaščen USB ključek, sistem deluje na naslednji način:
+
+1. Prepoznavanje naprave: Sophos takoj zazna novo povezano napravo in preveri njeno identiteto na podlagi vnaprej določenih pravil.
+2. Primerjava z varnim seznamom: Sistem primerja USB napravo z "belim seznamom" dovoljenih naprav, ki so bile predhodno odobrene s strani IT oddelka.
+3. Reakcija na nepooblaščeno napravo: Če naprava ni na seznamu, Sophos avtomatsko blokira dostop do nje in prepreči kakršnokoli interakcijo s podatki na ključku. V nekaterih primerih je mogoče prikazati obvestilo uporabniku z razlago, zakaj dostop ni dovoljen.
+4. Obveščanje administratorja: Administrator sistema prejme opozorilo v realnem času preko Sophos Central, kjer je naveden računalnik, uporabnik in vrsta blokirane naprave.
+
+
+https://github.com/user-attachments/assets/c8d3ba6d-0faf-44be-a6bf-b0d8b0a80ce2
+
+
