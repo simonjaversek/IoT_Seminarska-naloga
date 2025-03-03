@@ -1,13 +1,19 @@
 # IoT_Seminarska-naloga
 *Vzpostavitev Ubuntu strežnika na rPi 3 in vzpostavitev Sophos-a (kibernetska varnost)*
-
-*1. Vzpostavitev Ubuntu strežnika na Raspberry Pi 3*
  
 V tej seminarski nalogi bom opisal postopek vzpostavitve Ubuntu strežnika na napravi Raspberry Pi 3 ter namestitev in konfiguracijo varnostne rešitve Sophos. Namen naloge je prikazati praktičen postopek priprave delujočega strežnika na osnovi priljubljene distribucije Ubuntu, ki je znana po svoji stabilnosti in prilagodljivosti, ter implementacije Sophos-a za povečanje varnosti sistema. 
+
+## Vzpostavitev Ubuntu strežnika na Raspberry Pi 3
+
+### 1. Vzpostavitev varnega testnega okolja za IoT in OT
 
 Projekt se je začel na fakulteti, kjer smo prevzeli paket z napravo Raspberry Pi 3 (rPi 3), ki je cenovno dostopna in učinkovita platforma za različne vrste strežniških in učenjskih projektov. V nadaljevanju bom predstavil korake, ki sem jih izvedel za vzpostavitev sistema. 
 
 Postopek vzpostavitve Ubuntu strežnika:
+
+### 1.1 Namestitev Linux Ubuntu Server na Raspberry Pi
+
+![image](https://github.com/user-attachments/assets/3c6dc984-5cfe-46cc-b443-f0e437665b69)
 
 Prvi korak pri pripravi sistema je bil namestitev operacijskega sistema na napravo Raspberry Pi 3. Za ta namen sem uporabil orodje Raspberry Pi Imager, ki omogoča enostavno zapisovanje operacijskih sistemov na SD kartico. Postopek je potekal na naslednji način: 
 1. Namestitev Raspberry Pi Imager-ja Najprej sem prenesel in namestil programsko opremo Raspberry Pi Imager na svoj osebni računalnik. Orodje je na voljo za večino operacijskih sistemov (Windows, macOS, Linux) in je uporabniku prijazno.
@@ -16,6 +22,35 @@ Prvi korak pri pripravi sistema je bil namestitev operacijskega sistema na napra
 4. Vstavljanje SD kartice v Raspberry Pi 3 Ko je bil zapis operacijskega sistema zaključen, sem SD kartico vstavil nazaj v napravo Raspberry Pi 3.
 
 S temi koraki sem uspešno pripravil napravo za zagon Ubuntu strežnika.
+
+### 1.2 Posodobitev sistema in namestitev osnovnih varnostnih paketov
+
+Ko sem se povezal na Ubuntu server sem najprej posodobil in namestil osnovne varnostne pakete:
+
+- Posodobitev seznama paketov:
+Ukaz **sudo apt update** osveži seznam razpoložljivih paketov in njihovih različic iz skladišč.
+
+![image](https://github.com/user-attachments/assets/36cefc92-071f-48db-87f5-9760fb894c3f)
+
+- Nadgradnja obstoječih paketov:
+Ukaz **sudo apt upgrade -y** nadgradi vse pakete na novejše različice, ki so na voljo.
+
+- Namestitev osnovnih varnostnih paketov:
+Za izboljšano varnost lahko namestimo pakete, kot so:
+
+UFW (Uncomplicated Firewall): **sudo apt install ufw -y**
+
+Fail2Ban (za zaščito pred napadi z ugibanjem gesel): **sudo apt install fail2ban -y**
+
+ClamAV (antivirus za Linux): **sudo apt install clamav -y**
+
+- Omogočanje požarnega zidu (UFW)
+**sudo ufw enable** aktivira požarni zid za večjo varnost.
+
+S tem sem si sistem posodobil in izboljšal njegovo varnost.
+
+### 1.3 Registracija in konfiguracija delujoče domene (ali uporaba brezplačnih dinamičnih DNS storitev, če je potrebno)
+
 
 Ko sem vklopil napravo Raspberry Pi 3 v napajanje, sem na svojem usmerjevalniku preveril, kateri IP naslov je bil dodeljen napravi. Ta IP naslov sem nato nastavil kot statičen, da bi bil vedno enak. Zatem sem se z uporabo protokola SSH povezal na Ubuntu strežnik za nadaljnjo konfiguracijo.
 
@@ -31,8 +66,92 @@ Da bi domena simon1999.xyz dejansko delovala, sem moral na svojem usmerjevalniku
 
 ![image](https://github.com/user-attachments/assets/1bc96d29-8c51-4528-9d68-71c7210a03a7)
 
+Povezava do moje domene: http://simon1999.xyz
 
-*2. Vzpostavitev Sophos-a*
+![image](https://github.com/user-attachments/assets/a918d8bb-7c5b-432e-a56c-69399b2d62d5)
+
+### 1.4 Nastavitev HTTPS povezave z uporabo SSL/TLS certifikata (npr. Let’s Encrypt)
+
+Namestil sem Certbot in vtičnik za Nginx z ukazom: **sudo apt install certbot python3-certbot-nginx -y**
+
+Certifikat sem pridobil in samodejno konfiguriral Nginx z ukazom: **sudo certbot --nginx -d simon1999.xyz -d www.simon1999.xyz**
+
+Preveril sem, ali je avtomatska obnova omogočena: **sudo certbot renew --dry-run**
+
+Po uspešni namestitvi sem odprl https://simon1999.xyz in preveril, ali povezava uporablja SSL/TLS.
+
+S tem sem uspešno vzpostavil HTTPS povezavo.
+
+Povezava do moje domene: https://simon1999.xyz
+
+![image](https://github.com/user-attachments/assets/7faa1968-5d21-46a0-8f43-49cc1b95c114)
+
+### 1.5 Namestitev Node.js in testnega strežnika
+
+Najprej sem posodobil sistem in namestil Node.js ter npm:
+**sudo apt update && sudo apt install nodejs npm -y**
+
+Preveril sem, ali sta bila uspešno nameščena:
+
+![image](https://github.com/user-attachments/assets/6ca2ad74-cf65-44c8-a457-700e4267ca96)
+
+Ustvarjanje testnega strežnika: 
+
+Ustvaril sem novo datoteko test.js ter vanjo sem vpisal preprost HTTP strežnik:
+
+`var http = require('http');`
+
+`http.createServer(function (req, res) {`
+
+  `res.writeHead(200, {'Content-Type': 'text/plain'});`
+  
+  `res.end('Pozdravljen svet\n');`
+  
+`}).listen(8080);`
+
+`console.log('Server running');`
+
+Za zagon sem uporabil ukaz: **node test.js**
+
+<br />
+
+Za trajno delovanje strežnika sem namestil pm2:
+
+`sudo npm install -g pm2`
+
+`pm2 start server.js`  
+
+`pm2 startup`
+
+<br />
+
+S tem sem uspešno namestil Node.js in vzpostavil testni strežnik.
+
+### 1.6. Konfiguracija Nginx kot obratnega posrednika (reverse proxy) za usmerjanje prometa na Node.js aplikacijo
+
+Najprej sem namestil nginx: **sudo apt install nginx**.
+
+Nato sem uredil UFW :
+
+![image](https://github.com/user-attachments/assets/4f10b075-306f-4659-8c1d-81ed833dfa3a)
+
+In zadeva že deluje:
+
+ ![image](https://github.com/user-attachments/assets/b6a74e2c-b2e8-496f-8d51-ddb90d2c1db2)
+
+### 1.7 Priključitev LED-diode in pritisnega gumba na Raspberry Pi
+
+
+### 1.8 Razvoj enostavnega spletnega vmesnika, ki omogoča vklop in izklop LED-diode
+
+
+### 1.9 Prikaz stanja pritisnega gumba v realnem času
+
+
+### 1.10 Prikaz delovanja s praktično demonstracijo
+
+
+## Vzpostavitev Sophos-a
 
 Podjetje, kjer delujem, se uvršča med subjekte kritične infrastrukture, zato smo se odločili vzpostaviti napreden sistem za kibernetsko zaščito – Sophos. Namen te odločitve je izboljšati varnostne ukrepe in zaščititi ključne digitalne procese ter naprave pred sodobnimi kibernetskimi grožnjami.
 
