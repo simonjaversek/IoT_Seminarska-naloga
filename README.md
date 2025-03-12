@@ -141,6 +141,12 @@ In zadeva že deluje:
 
 ### 1.7 Priključitev LED-diode in pritisnega gumba na Raspberry Pi
 
+Videjo priključene LED-diode, pritisnega gumba ter povezav na Raspberry Pi:
+
+https://github.com/user-attachments/assets/480fe120-dc68-40a9-a43e-24996dba0e62
+
+
+
 
 ### 1.8 Razvoj enostavnega spletnega vmesnika, ki omogoča vklop in izklop LED-diode
 
