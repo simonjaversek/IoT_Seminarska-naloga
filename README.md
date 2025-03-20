@@ -150,8 +150,16 @@ https://github.com/user-attachments/assets/480fe120-dc68-40a9-a43e-24996dba0e62
 
 ### 1.8 Razvoj enostavnega spletnega vmesnika, ki omogoča vklop in izklop LED-diode
 
+Spletni vmesnik, ki sem ga razvil za vklop in izklop LED-diode, izgleda tako (za podrobnejši vpogled si lahko ogledate kodo v datoteki index.html):
+
+![image](https://github.com/user-attachments/assets/e06cd065-cb74-4339-a31f-33d8c5736c14)
+
 
 ### 1.9 Prikaz stanja pritisnega gumba v realnem času
+
+Spletni vmesnik sem posodobil tako, da v realnem času prikazuje stanje LED-lučke (ali je vklopljena ali izklopljena). Za podrobnejši vpogled si lahko ogledate kodo v datotekah index.html in LED.py.
+
+![image](https://github.com/user-attachments/assets/47209d52-743a-490a-aff0-e9edc00f9278)
 
 
 ### 1.10 Prikaz delovanja s praktično demonstracijo
