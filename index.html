@@ -141,10 +141,12 @@
     });
 </script>
 
-  </head>
+
+</head>
 <body>
     <div class="container">
         <h1>SIMONOVA LED LUČKA :)</h1>
+        <div class="status">Stanje: <span id="led-status">Nalaganje...</span></div>
         <div class="buttons">
         <span class="character">👉</span>
         <button class="btn btn-on" onclick="controlLED('on')">VKLOP</button>
@@ -157,24 +159,29 @@
 <script>
 
         function controlLED(action) {
-
             const url = action === 'on' ? '/led/activate' : '/led/deactivate';
-
-            fetch(url, {
-                method: 'POST'
-            })
+            fetch(url, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
-
-                document.getElementById('led-status').textContent = data.message;
+                document.getElementById('led-status').textContent = "Stanje: " + data.status;
             })
-            .catch(err => {
-                console.error('Napaka pri nadzoru LED:', err);
-            });
+            .catch(err => console.error('Napaka pri nadzoru LED:', err));
         }
+
+        // Dodana funkcija za osveževanje stanja LED vsako sekundo
+        function fetchLEDStatus() {
+            fetch('/led/status')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('led-status').textContent = "Stanje: " + data.status;
+            })
+            .catch(err => console.error('Napaka pri pridobivanju statusa LED:', err));
+        }
+
+        // Osveži vsako sekundo
+        setInterval(fetchLEDStatus, 1000);
+        window.onload = fetchLEDStatus;
 
 </script>
 </body>
 </html>
-
-
