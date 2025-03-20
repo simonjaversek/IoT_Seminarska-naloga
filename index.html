@@ -167,8 +167,7 @@
             })
             .catch(err => console.error('Napaka pri nadzoru LED:', err));
         }
-
-        // Dodana funkcija za osveževanje stanja LED vsako sekundo
+    
         function fetchLEDStatus() {
             fetch('/led/status')
             .then(response => response.json())
@@ -178,7 +177,6 @@
             .catch(err => console.error('Napaka pri pridobivanju statusa LED:', err));
         }
 
-        // Osveži vsako sekundo
         setInterval(fetchLEDStatus, 1000);
         window.onload = fetchLEDStatus;
 
