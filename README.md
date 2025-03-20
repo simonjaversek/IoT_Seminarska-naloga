@@ -164,6 +164,13 @@ Spletni vmesnik sem posodobil tako, da v realnem času prikazuje stanje LED-luč
 
 ### 1.10 Prikaz delovanja s praktično demonstracijo
 
+Video prikazuje delovanje spletnega vmesnika s praktično demonstracijo na LED-diodi:
+
+
+
+https://github.com/user-attachments/assets/2625d1f0-51dd-40ba-a8ab-652e82432aa2
+
+
 
 ## Vzpostavitev Sophos-a
 
