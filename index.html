@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simonova LED lučka :)</title>
+     <style>
+    @keyframes backgroundShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    body {
+        background: linear-gradient(-45deg, #2b1055, #7597de, #590fb7, #060c21);
+        background-size: 300% 300%;
+        animation: backgroundShift 8s infinite ease-in-out;
+        color: #f8f8f8;
+        font-family: 'Roboto Mono', monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .container {
+        text-align: center;
+        border: 3px solid #ff9800;
+        padding: 25px;
+        border-radius: 15px;
+        background: rgba(37, 37, 37, 0.9);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(255, 152, 0, 0.8);
+        width: 350px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+        transform: scale(1.05);
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 15px;
+        color: #ff9800;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+    }
+
+    .btn {
+        font-size: 1.2em;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-on {
+        background: linear-gradient(145deg, #4caf50, #66bb6a);
+        box-shadow: 0 0 20px rgba(76, 175, 80, 1);
+    }
+    .btn-on:hover {
+        background: linear-gradient(145deg, #43a047, #388e3c);
+        box-shadow: 0 0 30px rgba(76, 175, 80, 1);
+        transform: translateY(-3px);
+    }
+
+    .btn-off {
+        background: linear-gradient(145deg, #f44336, #e53935);
+        box-shadow: 0 0 20px rgba(244, 67, 54, 1);
+    }
+
+    .btn-off:hover {
+        background: linear-gradient(145deg, #d32f2f, #c62828);
+        box-shadow: 0 0 30px rgba(244, 67, 54, 1);
+        transform: translateY(-3px);
+    }
+
+    /* Funny Character */
+    .character {
+        font-size: 50px;
+        position: absolute;
+        left: -80px;
+        top: 10px;
+        transform: rotate(-10deg);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .character:hover {
+        transform: rotate(0deg) scale(1.1);
+    }
+
+    /* Speech Bubble */
+    .speech {
+        position: absolute;
+        left: -150px;
+        top: -50px;
+        background: white;
+        color: black;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        opacity: 0;
+        transform: scale(0);
+        transition: 0.3s ease-in-out;
+    }
+
+    .btn:hover + .speech {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const body = document.body;
+
+        for (let i = 0; i < 15; i++) {
+            let particle = document.createElement("div");
+            particle.classList.add("particle");
+            particle.style.left = Math.random() * 100 + "vw";
+            particle.style.animationDuration = Math.random() * 5 + 3 + "s";
+            particle.style.animationDelay = Math.random() * 5 + "s";
+            body.appendChild(particle);
+        }
+    });
+</script>
+
+  </head>
+<body>
+    <div class="container">
+        <h1>SIMONOVA LED LUČKA :)</h1>
+        <div class="buttons">
+        <span class="character">👉</span>
+        <button class="btn btn-on" onclick="controlLED('on')">VKLOP</button>
+        <div class="speech">Vklopi me, če si upaš! 😆</div>
+        <button class="btn btn-off" onclick="controlLED('off')" >IZKLOP</button>
+    </div>
+</div>
+
+
+<script>
+
+        function controlLED(action) {
+
+            const url = action === 'on' ? '/led/activate' : '/led/deactivate';
+
+            fetch(url, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById('led-status').textContent = data.message;
+            })
+            .catch(err => {
+                console.error('Napaka pri nadzoru LED:', err);
+            });
+        }
+
+</script>
+</body>
+</html>
+
+
