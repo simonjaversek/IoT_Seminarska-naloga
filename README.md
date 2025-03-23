@@ -171,6 +171,34 @@ Video prikazuje delovanje spletnega vmesnika s praktično demonstracijo na LED-d
 https://github.com/user-attachments/assets/2625d1f0-51dd-40ba-a8ab-652e82432aa2
 
 
+### 2. Varna komunikacija med IoT napravami
+
+V tem delu sem moral zagotoviti varen prenos podatkov med Raspberry Pi in oddaljenim odjemalcem za LED in pritisnnjeni gumb.
+
+### 2.1 Implementacija MQTT ali WebSocket komunikacije med strežnikom in odjemalcem za upravljanje LED in branje stanja gumba
+
+Za komunikacijo med strežnikom in odjemalcem za upravljanje LED in branje stanja gumba sem izbral implementacijo MQTT.
+
+Najprej sem ustvaril virtualno okolje v moji mapi, kjer imam datoteko LED.py s kodo: **python3 -m venv myenv**
+
+![image](https://github.com/user-attachments/assets/1b3d586b-1702-431b-86cf-5f95a35eeef8)
+
+Nato sem vstopil v virtualno okolje z ukazom **activate** ter znotraj okolja namestil **paho-mqtt**:
+
+![image](https://github.com/user-attachments/assets/8457a268-fc75-4095-b445-4c0423fe8763)
+
+Nato sem moral dodati MQTT svoji aplikaciji Flask. To sem storil tako, da sem namestil **Mosquitto**:
+
+![image](https://github.com/user-attachments/assets/bdfcb04e-9784-441e-81a3-bfdcf33dfbbc)
+![image](https://github.com/user-attachments/assets/836a2474-0b68-4e11-bbc7-af6f8392024b)
+
+Nato sem seveda moral posodobiti svojo kodo v datoteki LED.py in vključiti MQTT. Za podroben pregled kode odprite datoteko **LED-MQTT.py**
+
+Po tem, ko sem uspel sprogramirati in posodobiti kodo, da je vključevala MQTT, sem šel v virtualno okolje in iz njega zagnal svoj program:
+
+![image](https://github.com/user-attachments/assets/aa6a6e68-ebb7-42c6-b2e4-cde4a29d5bcd)
+
+In zdaj, vsakič, ko pritisnem na gumb, mi javi **"LED turned OFF via MQTT"** ali **"LED turned ON via MQTT"**.
 
 ## Vzpostavitev Sophos-a
 
