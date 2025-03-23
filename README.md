@@ -206,6 +206,44 @@ In zdaj, vsakič, ko pritisnem na gumb, mi javi **"LED turned OFF via MQTT"** al
 
 -**Poraba virov**: Šifriranje porabi več CPU moči in pomnilnika. Močnejši algoritmi (npr. AES-256) povečajo porabo procesorske moči in s tem vplivajo na energetsko porabo, kar je pomembno pri napravah z omejenimi viri, kot so IoT naprave.
 
+### 2.4 Simulacija in dokumentacija ranljivosti nešifrirane komunikacije (npr. prestrezanje podatkov s pomočjo Wiresharka)
+
+Inštaliral sem Wireshark in preveril, kaj se vidi, ter ali lahko zajamem kakšno komunikacijo. Dobil sem naslednje:
+
+![image](https://github.com/user-attachments/assets/3a7853a3-4741-4f26-be2f-c4d0a43f402b)
+
+Ujel se je ARP protokol, kjer naprava z naslovom 192.168.1.11 išče MAC naslov naprave, ki ima IP naslov 192.168.1.10. To ni neposredno povezano z ranljivostmi nešifrirane komunikacije, vendar pa obstajajo pomembne stvari, ki jih lahko iz tega izpeljemo v kontekstu varnosti in ranljivosti, kot so:
+
+- ARP Spoofing / ARP Poisoning: Ta napad lahko nastane, ko napadalec pošlje napačne ARP odgovore na omrežje in napačno priredi MAC naslove za določene IP naslove. To pomeni, da naprava lahko začne pošiljati promet na napačno napravo, običajno napadalca.
+  
+- Lahko pride do Man-in-the-Middle (MITM) napada, kjer napadalec prestreže, spremeni ali preusmeri komunikacijo med dvema naprava.
+
+Kaj več se ni videlo, ker sem uporabljal HTTPS (kar je odlično za varnost) in sem poskrbel, da se HTTP preusmeri na HTTPS. Če tega ne bi imel, pa bi se lahko bistveno več videlo.
+
+### 4. Zaznavanje varnostnih groženj v IoT s sistemom za zaznavanje vdorov (IDS)
+
+V tem delu bom namestil lahek sistem za zaznavanje vdorov (IDS) za nadzor omrežnega prometa Raspberry Pi
+
+### Namestitev in konfiguracija Snort ali Suricata na Raspberry Pi
+
+Za namestitev sem si izbral Suricato. Suricata zahteva nekaj osnovnih orodij in knjižnic, ki sem jih najprej namestil:
+
+![image](https://github.com/user-attachments/assets/9af45e51-0ec4-4cde-9c00-bfeaa0334119)
+
+Nato sem namestil Suricato z naslednjim ukazom **sudo apt install -y suricata**:
+
+![image](https://github.com/user-attachments/assets/04924f2d-6fcc-45f1-acc0-04721d173bcd)
+
+Po namestitvi sem preveril, ali je bila Suricata uspešno nameščena:
+
+![image](https://github.com/user-attachments/assets/d804b49b-6183-4559-80ad-565a0b651a19)
+
+Zdaj, ko je Suricata uspešno nameščena, jo moram še samo skonfigurirati, in to v datoteki **/etc/suricata/suricata.yaml** (tukaj sem še posebej pazljiv, da nastavi pravilni vmesnik).
+
+![image](https://github.com/user-attachments/assets/c7be8116-430f-42d5-a716-c6d88e70bc40)
+
+Ko je vse nastavljeno, sem zagnal Suricato za analizo prometa z ukazom: **sudo suricata -c /etc/suricata/suricata.yaml -i wlan0**
+
 ## Vzpostavitev Sophos-a
 
 Podjetje, kjer delujem, se uvršča med subjekte kritične infrastrukture, zato smo se odločili vzpostaviti napreden sistem za kibernetsko zaščito – Sophos. Namen te odločitve je izboljšati varnostne ukrepe in zaščititi ključne digitalne procese ter naprave pred sodobnimi kibernetskimi grožnjami.
