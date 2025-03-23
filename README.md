@@ -200,6 +200,12 @@ Po tem, ko sem uspel sprogramirati in posodobiti kodo, da je vključevala MQTT, 
 
 In zdaj, vsakič, ko pritisnem na gumb, mi javi **"LED turned OFF via MQTT"** ali **"LED turned ON via MQTT"**.
 
+### 2.3 Analiza vpliva šifriranja na zakasnitev in porabo virov
+
+-**Zakasnitev**: Šifriranje povečuje zakasnitev pri prenosu podatkov, saj zahteva dodatno obdelavo podatkov. To se še posebej pozna pri močnejših algoritmih, kot je AES v 256-bitnem načinu, ki so bolj kompleksni.
+
+-**Poraba virov**: Šifriranje porabi več CPU moči in pomnilnika. Močnejši algoritmi (npr. AES-256) povečajo porabo procesorske moči in s tem vplivajo na energetsko porabo, kar je pomembno pri napravah z omejenimi viri, kot so IoT naprave.
+
 ## Vzpostavitev Sophos-a
 
 Podjetje, kjer delujem, se uvršča med subjekte kritične infrastrukture, zato smo se odločili vzpostaviti napreden sistem za kibernetsko zaščito – Sophos. Namen te odločitve je izboljšati varnostne ukrepe in zaščititi ključne digitalne procese ter naprave pred sodobnimi kibernetskimi grožnjami.
