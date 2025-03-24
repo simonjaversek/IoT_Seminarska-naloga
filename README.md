@@ -129,7 +129,7 @@ Za trajno delovanje strežnika sem namestil pm2:
 
 S tem sem uspešno namestil Node.js in vzpostavil testni strežnik.
 
-### 1.6. Konfiguracija Nginx kot obratnega posrednika (reverse proxy) za usmerjanje prometa na Node.js aplikacijo
+### 1.6 Konfiguracija Nginx kot obratnega posrednika (reverse proxy) za usmerjanje prometa na Node.js aplikacijo
 
 Najprej sem namestil nginx: **sudo apt install nginx**.
 
@@ -280,6 +280,46 @@ Zdaj, ko je Suricata uspešno nameščena, jo moram še samo skonfigurirati, in 
 ![image](https://github.com/user-attachments/assets/c7be8116-430f-42d5-a716-c6d88e70bc40)
 
 Ko je vse nastavljeno, sem zagnal Suricato za analizo prometa z ukazom: **sudo suricata -c /etc/suricata/suricata.yaml -i wlan0**
+
+### 5. Zaščita proti fizičnim in omrežnim napadom IoT naprav
+
+Povzetek zaščite proti fizičnim in omrežnim napadom na IoT naprave:
+
+- Preprečevanje nepooblaščenega fizičnega dostopa do naprave:
+
+Fizična zaščita naprave je ključna za preprečevanje nepooblaščenega dostopa. To vključuje zaklepanje naprav v zaščitenih prostorih in zagotavljanje varnosti z uporabo fizičnih zaščitnih mehanizmov. To sem naredil tako, da sem zaklenil sobo, v kateri sem imel Arduino.
+
+- Onemogočanje nepotrebnih storitev:
+
+Onemogočanje vseh nepotrebnih storitev zmanjša površino napada, saj odstrani možnosti za izkoriščanje ranljivosti v neuporabljenih storitvah. Zato sem poskrbel, da sem namestil le tiste storitve, ki sem jih nujno potreboval za projekt.
+
+- Omogočanje požarnega zidu UFW in omejitev dovoljenih vrat:
+
+Namestitev in konfiguracija UFW omogoča omejevanje dostopa do naprave samo iz dovoljenih virov ter zaščito pred nepooblaščenimi povezavami. Kot sem navedel v 1. točki tega projekta, sem UFW firewall namestil na Ubuntu, ga aktiviral in konfiguriral.
+
+- Spremljanje celovitosti datotek z AIDE (Advanced Intrusion Detection Environment):
+
+Uporaba orodja AIDE omogoča spremljanje sprememb v datotekah in pravočasno odkrivanje morebitnih napadov ali nepooblaščenih sprememb v datotečnem sistemu. Kot sem navedel v točki 4, sem v tem projektu za IDS uporabil Suricata.
+
+- Izvajanje skeniranja odprtih vrat z Nmap in analiza morebitnih ranljivosti:
+
+Redno skeniranje naprave z orodjem Nmap omogoča odkrivanje odprtih vrat in morebitnih ranljivosti, kar pomaga pri preprečevanju napadov, ki izkoriščajo nezaščitene storitve.
+
+- Simulacija brute-force napada na SSH in dokumentiranje strategij omilitve:
+
+Simulacija brute-force napada na SSH omogoča testiranje odpornosti sistema proti napadom z večkratnim poskusom prijave. To sem naredil z orodjem **Hydra**
+**sudo apt update && sudo apt install hydra -y**
+**hydra -l pi -P passwords.txt ssh://192.168.1.10** za passwords.txt sem uporabil obstoječ seznam rockyou.txt
+
+### 6. Beleženje, nadzor in odziv na incidente
+
+- Kot sem že predstavil v prejšnjih točkah, imam urejeno beleženje API zahtevkov in dostopov do strežnika:
+
+Uporabljam Flask logging access logs, kjer se beležijo vsi dostopi (vključno z neuspelimi poskusi). Dnevniške datoteke so shranjene v **/var/log/**.
+
+- Kot sem že predstavil v prejšnjih točkah, imam urejeno beleženje sistemskih dogodkov:
+
+Uporabljam **auth.log** za spremljanje neuspelih prijav **/var/log/auth.log** ter UFW logs **/var/log/ufw.log** za spremljanje zavrnjenih povezav.
 
 ## Vzpostavitev Sophos-a
 
