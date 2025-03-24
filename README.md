@@ -3,7 +3,7 @@
  
 V tej seminarski nalogi bom opisal postopek vzpostavitve Ubuntu strežnika na napravi Raspberry Pi 3 ter namestitev in konfiguracijo varnostne rešitve Sophos. Namen naloge je prikazati praktičen postopek priprave delujočega strežnika na osnovi priljubljene distribucije Ubuntu, ki je znana po svoji stabilnosti in prilagodljivosti, ter implementacije Sophos-a za povečanje varnosti sistema. 
 
-**OPOMBA:** Kot se vidi, imam na GitHubu naložene več različnih **.py** in **.html** datotek. **LED-MQTT.py** je nadgradnja **LED.py** (torej večinoma ista koda, le da je dodana koda za delovanje MQTT), medtem ko je **LED-token.py** nadgradnja **LED-MQTT.py** (večinoma ista koda, vendar z dodano podporo za token-based avtentikacijo). **index-TOKEN.html** pa je nadgradnja **index.html** datoteke.
+**OPOMBA:** Kot se vidi, imam na GitHubu naložene več različnih **.py** in **.html** datotek. **LED-MQTT.py** je nadgradnja **LED.py** (torej večinoma ista koda, le da je dodana koda za delovanje MQTT), medtem ko je **LED-TOKEN.py** nadgradnja **LED-MQTT.py** (večinoma ista koda, vendar z dodano podporo za token-based avtentikacijo). **index-TOKEN.html** pa je nadgradnja **index.html** datoteke.
 
 ## Vzpostavitev Ubuntu strežnika na Raspberry Pi 3
 
