@@ -242,6 +242,19 @@ Sem že implementiral končne točke RESTful API za branje stanja gumba v moji a
 
 ### 3.3 Zavarovanje dostopa s token-based avtentikacijo (npr. JWT)
 
+Pri tej točki sem:
+
+- Dodal obrazec za vnos tajnega ključa na spletno stran.
+
+- Ko uporabnik vnese pravilen ključ, generira JWT žeton.
+
+- Žeton se shrani v localStorage in se uporablja za avtorizacijo pri naslednjih zahtevkih (npr. za vklop/izklop LED lučke).
+
+- To omogoča, da uporabnik sam vnese tajni ključ in prejme žeton za dostop do funkcionalnosti.
+
+![image](https://github.com/user-attachments/assets/aa40ea31-d05d-487c-968d-415f0febcd0a)
+
+Implementacijo si lahko podrobneje pogledate v datoteki **LED-TOKEN.py** in **index-TOKEN.html**
 
 
 ### 4. Zaznavanje varnostnih groženj v IoT s sistemom za zaznavanje vdorov (IDS)
