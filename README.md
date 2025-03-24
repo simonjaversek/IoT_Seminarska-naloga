@@ -3,6 +3,8 @@
  
 V tej seminarski nalogi bom opisal postopek vzpostavitve Ubuntu strežnika na napravi Raspberry Pi 3 ter namestitev in konfiguracijo varnostne rešitve Sophos. Namen naloge je prikazati praktičen postopek priprave delujočega strežnika na osnovi priljubljene distribucije Ubuntu, ki je znana po svoji stabilnosti in prilagodljivosti, ter implementacije Sophos-a za povečanje varnosti sistema. 
 
+**OPOMBA:** Kot se vidi, imam na GitHubu naložene več različnih **.py** in **.html** datotek. **LED-MQTT.py** je nadgradnja **LED.py** (torej večinoma ista koda, le da je dodana koda za delovanje MQTT), medtem ko je **LED-token.py** nadgradnja **LED-MQTT.py** (večinoma ista koda, vendar z dodano podporo za token-based avtentikacijo). **index-TOKEN.html** pa je nadgradnja **index.html** datoteke.
+
 ## Vzpostavitev Ubuntu strežnika na Raspberry Pi 3
 
 ### 1. Vzpostavitev varnega testnega okolja za IoT in OT
@@ -220,11 +222,33 @@ Ujel se je ARP protokol, kjer naprava z naslovom 192.168.1.11 išče MAC naslov 
 
 Kaj več se ni videlo, ker sem uporabljal HTTPS (kar je odlično za varnost) in sem poskrbel, da se HTTP preusmeri na HTTPS. Če tega ne bi imel, pa bi se lahko bistveno več videlo.
 
+### 3 Avtentikacija in avtorizacija v IoT napravah
+
+V tem delu sem implementiral mehanizme za nadzor dostopa do API-končnih točk za LED in tipko
+
+### 3.1  Ustvarjanje RESTful API-končnih točk za Vklop/izklop LED-diode
+
+Sem že implementiral končne točke RESTful API za vklop in izklop LED v moji aplikaciji. Implementacijo si lahko podrobneje pogledate v datoteki **LED-MQTT.py**
+
+![image](https://github.com/user-attachments/assets/d079a1b4-07fa-49aa-af61-2607ffe79735)
+
+![image](https://github.com/user-attachments/assets/f7c73b2a-fc9c-4b7b-9979-43798cfbc7f6)
+
+### 3.2 Ustvarjanje RESTful API-končnih točk za branje stanja gumba
+
+Sem že implementiral končne točke RESTful API za branje stanja gumba v moji aplikaciji. Implementacijo si lahko podrobneje pogledate v datoteki **LED-MQTT.py**
+
+![image](https://github.com/user-attachments/assets/65de60ba-321b-49ab-b677-373bef5e77be)
+
+### 3.3 Zavarovanje dostopa s token-based avtentikacijo (npr. JWT)
+
+
+
 ### 4. Zaznavanje varnostnih groženj v IoT s sistemom za zaznavanje vdorov (IDS)
 
 V tem delu bom namestil lahek sistem za zaznavanje vdorov (IDS) za nadzor omrežnega prometa Raspberry Pi
 
-### Namestitev in konfiguracija Snort ali Suricata na Raspberry Pi
+### 4.1 Namestitev in konfiguracija Snort ali Suricata na Raspberry Pi
 
 Za namestitev sem si izbral Suricato. Suricata zahteva nekaj osnovnih orodij in knjižnic, ki sem jih najprej namestil:
 
