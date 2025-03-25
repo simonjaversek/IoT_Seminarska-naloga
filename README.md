@@ -305,6 +305,8 @@ Uporaba orodja AIDE omogoča spremljanje sprememb v datotekah in pravočasno odk
 
 Redno skeniranje naprave z orodjem Nmap omogoča odkrivanje odprtih vrat in morebitnih ranljivosti, kar pomaga pri preprečevanju napadov, ki izkoriščajo nezaščitene storitve.
 
+![image](https://github.com/user-attachments/assets/5ce0dd5b-c752-4183-8abb-a1709d3a24bf)
+
 - Simulacija brute-force napada na SSH in dokumentiranje strategij omilitve:
 
 Simulacija brute-force napada na SSH omogoča testiranje odpornosti sistema proti napadom z večkratnim poskusom prijave. To sem naredil z orodjem **Hydra**
